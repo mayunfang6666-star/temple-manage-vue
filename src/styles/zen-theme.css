@@ -1,0 +1,482 @@
+/* 
+ * 禅意主题 - Zen Theme
+ * 传统中式设计风格
+ */
+
+/* ==================== 色彩系统 Color System ==================== */
+:root {
+  /* 主色调 - Primary Colors */
+  --zen-sandalwood: #6B4423;        /* 檀木棕 - Sandalwood Brown */
+  --zen-bronze: #B8860B;            /* 古铜金 - Antique Bronze */
+  --zen-ink-green: #2F4F4F;         /* 墨绿 - Ink Green */
+  --zen-moon-white: #F5F5DC;        /* 月白 - Moon White */
+  
+  /* 辅助色调 - Secondary Colors */
+  --zen-light-sandalwood: #8B6F47;  /* 浅檀木 */
+  --zen-dark-sandalwood: #4A2F1A;   /* 深檀木 */
+  --zen-light-bronze: #DAA520;      /* 浅古铜 */
+  --zen-dark-green: #1C3333;        /* 深墨绿 */
+  --zen-jade: #7CB342;              /* 翠玉绿 */
+  
+  /* 中性色 - Neutral Colors */
+  --zen-ink-black: #2C2C2C;         /* 墨黑 */
+  --zen-mist-gray: #E8E8E8;         /* 雾灰 */
+  --zen-paper-white: #FAFAF8;       /* 宣纸白 */
+  --zen-shadow: rgba(44, 44, 44, 0.1); /* 阴影 */
+  
+  /* 功能色 - Functional Colors */
+  --zen-success: #7CB342;           /* 成功 - 翠绿 */
+  --zen-warning: #DAA520;           /* 警告 - 金色 */
+  --zen-danger: #C62828;            /* 危险 - 朱红 */
+  --zen-info: #5C6BC0;              /* 信息 - 青蓝 */
+}
+
+/* ==================== 全局样式 Global Styles ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Serif SC', 'Source Han Serif SC', 'STSong', serif;
+  background: var(--zen-paper-white);
+  color: var(--zen-ink-black);
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+}
+
+/* 水墨山水背景 - Ink Wash Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(180deg, 
+      var(--zen-paper-white) 0%, 
+      rgba(245, 245, 220, 0.95) 30%,
+      rgba(232, 232, 232, 0.9) 70%,
+      var(--zen-mist-gray) 100%
+    ),
+    url('../assets/ink-wash-bg.png') center/cover no-repeat;
+  z-index: -2;
+  opacity: 0.6;
+}
+
+/* 祥云装饰 - Cloud Decoration */
+body::after {
+  content: '';
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 200px;
+  height: 200px;
+  background: url('../assets/cloud.png') center/contain no-repeat;
+  opacity: 0.15;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ==================== 布局容器 Layout Containers ==================== */
+.zen-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.zen-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--zen-mist-gray);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px var(--zen-shadow);
+  transition: all 0.3s ease;
+}
+
+.zen-card:hover {
+  box-shadow: 0 8px 30px rgba(107, 68, 35, 0.15);
+  transform: translateY(-2px);
+}
+
+/* 留白设计 - Whitespace Design */
+.zen-section {
+  margin: 4rem 0;
+  padding: 3rem 0;
+}
+
+.zen-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--zen-bronze) 20%,
+    var(--zen-bronze) 80%,
+    transparent
+  );
+  margin: 3rem 0;
+  opacity: 0.3;
+}
+
+/* ==================== 文字排版 Typography ==================== */
+.zen-title {
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--zen-sandalwood);
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.zen-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--zen-bronze),
+    transparent
+  );
+}
+
+.zen-subtitle {
+  font-size: 1.5rem;
+  color: var(--zen-ink-green);
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+
+.zen-text {
+  font-size: 1rem;
+  color: var(--zen-ink-black);
+  line-height: 1.8;
+}
+
+/* ==================== 按钮样式 Button Styles ==================== */
+.zen-btn {
+  padding: 0.75rem 2rem;
+  border: 2px solid var(--zen-sandalwood);
+  background: transparent;
+  color: var(--zen-sandalwood);
+  font-size: 1rem;
+  font-family: 'Noto Serif SC', serif;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.zen-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: var(--zen-sandalwood);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+  z-index: -1;
+}
+
+.zen-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.zen-btn:hover {
+  color: var(--zen-moon-white);
+  border-color: var(--zen-sandalwood);
+}
+
+.zen-btn-primary {
+  background: var(--zen-sandalwood);
+  color: var(--zen-moon-white);
+  border-color: var(--zen-sandalwood);
+}
+
+.zen-btn-primary:hover {
+  background: var(--zen-dark-sandalwood);
+  border-color: var(--zen-dark-sandalwood);
+}
+
+.zen-btn-bronze {
+  border-color: var(--zen-bronze);
+  color: var(--zen-bronze);
+}
+
+.zen-btn-bronze::before {
+  background: var(--zen-bronze);
+}
+
+/* ==================== 表单元素 Form Elements ==================== */
+.zen-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--zen-mist-gray);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  font-family: 'Noto Serif SC', serif;
+  color: var(--zen-ink-black);
+  transition: all 0.3s ease;
+}
+
+.zen-input:focus {
+  outline: none;
+  border-color: var(--zen-bronze);
+  box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+}
+
+.zen-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--zen-ink-green);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* ==================== 表格样式 Table Styles ==================== */
+.zen-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.zen-table thead {
+  background: linear-gradient(135deg, var(--zen-sandalwood), var(--zen-light-sandalwood));
+  color: var(--zen-moon-white);
+}
+
+.zen-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+}
+
+.zen-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--zen-mist-gray);
+  color: var(--zen-ink-black);
+}
+
+.zen-table tbody tr {
+  transition: all 0.3s ease;
+}
+
+.zen-table tbody tr:hover {
+  background: rgba(245, 245, 220, 0.3);
+}
+
+.zen-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ==================== 装饰元素 Decorative Elements ==================== */
+.zen-lotus-decoration {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 150px;
+  height: 150px;
+  background: url('../assets/lotus.png') center/contain no-repeat;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.zen-corner-decoration {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  opacity: 0.1;
+}
+
+.zen-corner-decoration.top-left {
+  top: 0;
+  left: 0;
+  background: url('../assets/cloud.png') center/contain no-repeat;
+}
+
+.zen-corner-decoration.bottom-right {
+  bottom: 0;
+  right: 0;
+  background: url('../assets/cloud.png') center/contain no-repeat;
+  transform: rotate(180deg);
+}
+
+/* ==================== 动画效果 Animations ==================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.zen-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes floatAnimation {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.zen-float {
+  animation: floatAnimation 3s ease-in-out infinite;
+}
+
+/* ==================== 响应式设计 Responsive Design ==================== */
+@media (max-width: 768px) {
+  .zen-container {
+    padding: 2rem 1rem;
+  }
+  
+  .zen-title {
+    font-size: 2rem;
+  }
+  
+  .zen-subtitle {
+    font-size: 1.25rem;
+  }
+  
+  .zen-card {
+    padding: 1.5rem;
+  }
+  
+  body::after,
+  .zen-lotus-decoration {
+    display: none;
+  }
+}
+
+/* ==================== 滚动条样式 Scrollbar Styles ==================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--zen-paper-white);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--zen-sandalwood);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--zen-dark-sandalwood);
+}
+
+/* ==================== Element Plus 组件覆盖 ==================== */
+.el-button {
+  font-family: 'Noto Serif SC', serif !important;
+}
+
+.el-table {
+  font-family: 'Noto Serif SC', serif !important;
+}
+
+.el-card {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid var(--zen-mist-gray) !important;
+}
+
+/* 主色调覆盖 */
+.el-button--primary {
+  background-color: var(--zen-sandalwood) !important;
+  border-color: var(--zen-sandalwood) !important;
+}
+
+.el-button--primary:hover {
+  background-color: var(--zen-light-sandalwood) !important;
+  border-color: var(--zen-light-sandalwood) !important;
+}
+
+.el-button--success {
+  background-color: var(--zen-jade) !important;
+  border-color: var(--zen-jade) !important;
+}
+
+.el-button--warning {
+  background-color: var(--zen-bronze) !important;
+  border-color: var(--zen-bronze) !important;
+}
+
+/* 链接按钮样式 - 提高可见性 */
+.el-button.is-link {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+/* 主要链接按钮 - 编辑按钮 */
+.el-button--primary.is-link {
+  color: var(--zen-bronze) !important;
+  font-weight: 500 !important;
+}
+
+.el-button--primary.is-link:hover {
+  color: var(--zen-light-bronze) !important;
+  background-color: rgba(184, 134, 11, 0.1) !important;
+}
+
+/* 信息链接按钮 - 查看按钮 */
+.el-button--info.is-link {
+  color: var(--zen-ink-green) !important;
+  font-weight: 500 !important;
+}
+
+.el-button--info.is-link:hover {
+  color: var(--zen-sandalwood) !important;
+  background-color: rgba(47, 79, 79, 0.1) !important;
+}
+
+/* 危险链接按钮 - 删除/取消按钮 */
+.el-button--danger.is-link {
+  color: var(--zen-danger) !important;
+  font-weight: 500 !important;
+}
+
+.el-button--danger.is-link:hover {
+  color: #D32F2F !important;
+  background-color: rgba(198, 40, 40, 0.1) !important;
+}
+
+/* 表格内按钮优化 */
+.el-table .el-button.is-link {
+  padding: 4px 8px !important;
+  font-size: 0.9rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.el-table .el-button.is-link:hover {
+  transform: translateX(2px);
+}
+

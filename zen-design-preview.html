@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>禅意设计系统 - Zen Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* 引入禅意主题 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --zen-sandalwood: #6B4423;
+      --zen-bronze: #B8860B;
+      --zen-ink-green: #2F4F4F;
+      --zen-moon-white: #F5F5DC;
+      --zen-light-sandalwood: #8B6F47;
+      --zen-dark-sandalwood: #4A2F1A;
+      --zen-light-bronze: #DAA520;
+      --zen-dark-green: #1C3333;
+      --zen-jade: #7CB342;
+      --zen-ink-black: #2C2C2C;
+      --zen-mist-gray: #E8E8E8;
+      --zen-paper-white: #FAFAF8;
+      --zen-shadow: rgba(44, 44, 44, 0.1);
+    }
+
+    body {
+      font-family: 'Noto Serif SC', 'Source Han Serif SC', 'STSong', serif;
+      background: var(--zen-paper-white);
+      color: var(--zen-ink-black);
+      line-height: 1.8;
+      letter-spacing: 0.05em;
+      min-height: 100vh;
+    }
+
+    /* 水墨山水背景 */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, 
+        var(--zen-paper-white) 0%, 
+        rgba(245, 245, 220, 0.95) 30%,
+        rgba(232, 232, 232, 0.9) 70%,
+        var(--zen-mist-gray) 100%
+      );
+      z-index: -2;
+      opacity: 0.8;
+    }
+
+    /* 祥云装饰 */
+    .cloud-decoration {
+      position: fixed;
+      opacity: 0.08;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .cloud-top-right {
+      top: 20px;
+      right: 20px;
+      width: 200px;
+      height: 200px;
+    }
+
+    .cloud-bottom-left {
+      bottom: 20px;
+      left: 20px;
+      width: 150px;
+      height: 150px;
+      transform: rotate(180deg);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    /* 标题样式 */
+    .main-title {
+      font-size: 3rem;
+      font-weight: 500;
+      color: var(--zen-sandalwood);
+      text-align: center;
+      margin-bottom: 1rem;
+      position: relative;
+      padding-bottom: 1.5rem;
+    }
+
+    .main-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(to right, transparent, var(--zen-bronze), transparent);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--zen-ink-green);
+      font-size: 1.2rem;
+      margin-bottom: 4rem;
+      font-weight: 300;
+    }
+
+    /* 分隔线 */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--zen-bronze) 20%, var(--zen-bronze) 80%, transparent);
+      margin: 4rem 0;
+      opacity: 0.3;
+    }
+
+    /* 卡片样式 */
+    .zen-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--zen-mist-gray);
+      border-radius: 12px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 20px var(--zen-shadow);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .zen-card:hover {
+      box-shadow: 0 8px 30px rgba(107, 68, 35, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .section-title {
+      font-size: 2rem;
+      color: var(--zen-sandalwood);
+      margin-bottom: 2rem;
+      font-weight: 500;
+    }
+
+    /* 色彩展示 */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .color-item {
+      text-align: center;
+    }
+
+    .color-swatch {
+      width: 100%;
+      height: 120px;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px var(--zen-shadow);
+      transition: transform 0.3s ease;
+    }
+
+    .color-swatch:hover {
+      transform: scale(1.05);
+    }
+
+    .color-name {
+      font-size: 1rem;
+      color: var(--zen-ink-black);
+      margin-bottom: 0.5rem;
+    }
+
+    .color-code {
+      font-size: 0.9rem;
+      color: var(--zen-ink-green);
+      font-family: 'Courier New', monospace;
+    }
+
+    /* 按钮展示 */
+    .button-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .zen-btn {
+      padding: 0.75rem 2rem;
+      border: 2px solid var(--zen-sandalwood);
+      background: transparent;
+      color: var(--zen-sandalwood);
+      font-size: 1rem;
+      font-family: 'Noto Serif SC', serif;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .zen-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: var(--zen-sandalwood);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+      z-index: -1;
+    }
+
+    .zen-btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .zen-btn:hover {
+      color: var(--zen-moon-white);
+    }
+
+    .zen-btn-primary {
+      background: var(--zen-sandalwood);
+      color: var(--zen-moon-white);
+    }
+
+    .zen-btn-bronze {
+      border-color: var(--zen-bronze);
+      color: var(--zen-bronze);
+    }
+
+    .zen-btn-bronze::before {
+      background: var(--zen-bronze);
+    }
+
+    .zen-btn-jade {
+      border-color: var(--zen-jade);
+      color: var(--zen-jade);
+    }
+
+    .zen-btn-jade::before {
+      background: var(--zen-jade);
+    }
+
+    /* 表格样式 */
+    .zen-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+
+    .zen-table thead {
+      background: linear-gradient(135deg, var(--zen-sandalwood), var(--zen-light-sandalwood));
+      color: var(--zen-moon-white);
+    }
+
+    .zen-table th {
+      padding: 1rem;
+      text-align: left;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .zen-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--zen-mist-gray);
+    }
+
+    .zen-table tbody tr {
+      transition: all 0.3s ease;
+    }
+
+    .zen-table tbody tr:hover {
+      background: rgba(245, 245, 220, 0.3);
+    }
+
+    .zen-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* 表单样式 */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .zen-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--zen-ink-green);
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .zen-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--zen-mist-gray);
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 1rem;
+      font-family: 'Noto Serif SC', serif;
+      color: var(--zen-ink-black);
+      transition: all 0.3s ease;
+    }
+
+    .zen-input:focus {
+      outline: none;
+      border-color: var(--zen-bronze);
+      box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+    }
+
+    /* 诗词装饰 */
+    .poetry {
+      text-align: center;
+      margin: 4rem 0;
+      padding: 3rem;
+      background: rgba(255, 255, 255, 0.5);
+      border-left: 3px solid var(--zen-bronze);
+      border-right: 3px solid var(--zen-bronze);
+    }
+
+    .poetry-line {
+      font-size: 1.3rem;
+      color: var(--zen-ink-green);
+      margin: 1rem 0;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+    }
+
+    /* 动画 */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+      .container {
+        padding: 2rem 1rem;
+      }
+
+      .main-title {
+        font-size: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+
+      .color-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cloud-decoration {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 祥云装饰 -->
+  <div class="cloud-decoration cloud-top-right">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50,100 Q60,80 80,85 T120,90 Q140,85 150,100 T140,120 Q120,125 100,120 T60,115 Q50,110 50,100" 
+            fill="none" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+    </svg>
+  </div>
+  <div class="cloud-decoration cloud-bottom-left">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50,100 Q60,80 80,85 T120,90 Q140,85 150,100 T140,120 Q120,125 100,120 T60,115 Q50,110 50,100" 
+            fill="none" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+    </svg>
+  </div>
+
+  <div class="container">
+    <!-- 主标题 -->
+    <h1 class="main-title fade-in">禅意设计系统</h1>
+    <p class="subtitle fade-in">Zen Design System · 传统中式美学</p>
+
+    <!-- 诗词装饰 -->
+    <div class="poetry fade-in">
+      <p class="poetry-line">空山新雨后，天气晚来秋</p>
+      <p class="poetry-line">明月松间照，清泉石上流</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 色彩系统 -->
+    <div class="zen-card fade-in">
+      <h2 class="section-title">色彩系统 · Color Palette</h2>
+      <p style="color: var(--zen-ink-green); margin-bottom: 2rem;">
+        以中国传统色彩为基础，融合禅意美学，营造宁静致远的视觉体验
+      </p>
+      
+      <div class="color-grid">
+        <div class="color-item">
+          <div class="color-swatch" style="background: var(--zen-sandalwood);"></div>
+          <div class="color-name">檀木棕</div>
+          <div class="color-code">#6B4423</div>
+        </div>
+        <div class="color-item">
+          <div class="color-swatch" style="background: var(--zen-bronze);"></div>
+          <div class="color-name">古铜金</div>
+          <div class="color-code">#B8860B</div>
+        </div>
+        <div class="color-item">
+          <div class="color-swatch" style="background: var(--zen-ink-green);"></div>
+          <div class="color-name">墨绿</div>
+          <div class="color-code">#2F4F4F</div>
+        </div>
+        <div class="color-item">
+          <div class="color-swatch" style="background: var(--zen-moon-white);"></div>
+          <div class="color-name">月白</div>
+          <div class="color-code">#F5F5DC</div>
+        </div>
+        <div class="color-item">
+          <div class="color-swatch" style="background: var(--zen-jade);"></div>
+          <div class="color-name">翠玉绿</div>
+          <div class="color-code">#7CB342</div>
+        </div>
+        <div class="color-item">
+          <div class="color-swatch" style="background: var(--zen-ink-black);"></div>
+          <div class="color-name">墨黑</div>
+          <div class="color-code">#2C2C2C</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 按钮组件 -->
+    <div class="zen-card fade-in">
+      <h2 class="section-title">按钮组件 · Buttons</h2>
+      <p style="color: var(--zen-ink-green); margin-bottom: 2rem;">
+        简约而不简单，每个交互都蕴含禅意
+      </p>
+      
+      <div class="button-grid">
+        <button class="zen-btn">默认按钮</button>
+        <button class="zen-btn zen-btn-primary">主要按钮</button>
+        <button class="zen-btn zen-btn-bronze">古铜按钮</button>
+        <button class="zen-btn zen-btn-jade">翠玉按钮</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 表格组件 -->
+    <div class="zen-card fade-in">
+      <h2 class="section-title">表格组件 · Table</h2>
+      <p style="color: var(--zen-ink-green); margin-bottom: 2rem;">
+        清晰的层次，优雅的排版
+      </p>
+      
+      <table class="zen-table">
+        <thead>
+          <tr>
+            <th>法师名号</th>
+            <th>修行年限</th>
+            <th>专长</th>
+            <th>状态</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>慧能大师</td>
+            <td>三十年</td>
+            <td>禅宗心法</td>
+            <td>在寺</td>
+          </tr>
+          <tr>
+            <td>玄奘法师</td>
+            <td>四十年</td>
+            <td>经文翻译</td>
+            <td>在寺</td>
+          </tr>
+          <tr>
+            <td>鉴真和尚</td>
+            <td>五十年</td>
+            <td>戒律传承</td>
+            <td>云游</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 表单组件 -->
+    <div class="zen-card fade-in">
+      <h2 class="section-title">表单组件 · Forms</h2>
+      <p style="color: var(--zen-ink-green); margin-bottom: 2rem;">
+        简洁的输入，专注的体验
+      </p>
+      
+      <div style="max-width: 500px;">
+        <div class="form-group">
+          <label class="zen-label">法师名号</label>
+          <input type="text" class="zen-input" placeholder="请输入法师名号">
+        </div>
+        <div class="form-group">
+          <label class="zen-label">修行年限</label>
+          <input type="text" class="zen-input" placeholder="请输入修行年限">
+        </div>
+        <div class="form-group">
+          <label class="zen-label">专长领域</label>
+          <input type="text" class="zen-input" placeholder="请输入专长领域">
+        </div>
+        <button class="zen-btn zen-btn-primary" style="width: 100%; margin-top: 1rem;">提交</button>
+      </div>
+    </div>
+
+    <!-- 底部诗词 -->
+    <div class="poetry fade-in" style="margin-top: 4rem;">
+      <p class="poetry-line">行到水穷处，坐看云起时</p>
+      <p class="poetry-line" style="font-size: 1rem; margin-top: 2rem; color: var(--zen-bronze);">
+        —— 禅意设计，静心之选
+      </p>
+    </div>
+  </div>
+</body>
+</html>

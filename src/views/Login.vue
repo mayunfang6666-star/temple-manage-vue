@@ -36,6 +36,17 @@
         登 录
       </el-button>
 
+      <!-- 测试账号提示 -->
+      <div class="test-accounts">
+        <div class="test-accounts-title">🔑 默认账号</div>
+        <div class="test-accounts-list">
+          <div class="account-item">
+            <span class="account-label">账号：</span>
+            <span class="account-value">admin / password</span>
+          </div>
+        </div>
+      </div>
+
       <div class="login-footer">
         <span class="footer-link" @click="openForgotPassword">忘记密码？</span>
         <span class="footer-divider">|</span>
@@ -485,6 +496,67 @@ onUnmounted(() => {
 
 .login-button:active {
   transform: translateY(0);
+}
+
+/* 测试账号提示框 */
+.test-accounts {
+  margin-top: 1.5rem;
+  padding: 1.2rem;
+  background: linear-gradient(
+    135deg,
+    rgba(245, 245, 220, 0.4),
+    rgba(255, 255, 255, 0.6)
+  );
+  border: 1px solid rgba(184, 134, 11, 0.2);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.test-accounts:hover {
+  border-color: rgba(184, 134, 11, 0.4);
+  box-shadow: 0 2px 12px rgba(107, 68, 35, 0.1);
+}
+
+.test-accounts-title {
+  font-size: 0.9rem;
+  color: var(--zen-sandalwood);
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.1em;
+  font-family: "Noto Serif SC", serif;
+}
+
+.test-accounts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.account-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: var(--zen-ink-green);
+  font-family: "Noto Sans SC", sans-serif;
+}
+
+.account-label {
+  color: var(--zen-ink-green);
+  opacity: 0.8;
+  margin-right: 0.5rem;
+}
+
+.account-value {
+  color: var(--zen-sandalwood);
+  font-weight: 500;
+  font-family: "Courier New", monospace;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 0.2rem 0.8rem;
+  border-radius: 4px;
+  border: 1px solid rgba(184, 134, 11, 0.15);
 }
 
 /* 底部信息 */

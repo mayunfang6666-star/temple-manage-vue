@@ -2,7 +2,7 @@ import axios from "axios";
 import { ElMessage } from "element-plus";
 
 const service = axios.create({
-  baseURL: "http://localhost:9090/api", // Spring Boot Backend URL
+  baseURL: "http://192.168.103.98:9090/api", // Spring Boot Backend URL (本地IP)
   timeout: 5000,
 });
 
